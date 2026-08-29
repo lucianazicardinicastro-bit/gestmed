@@ -189,7 +189,7 @@ p { color: var(--muted); }
 .testimonials-section { overflow: hidden; background: var(--white); }
 .testimonials-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 2.8rem; }
 .testimonials-header h2 { max-width: 700px; margin-bottom: 0; }
-.carousel-controls { display: flex; gap: .6rem; }
+.carousel-controls { display: none; gap: .6rem; }
 .carousel-button { display: grid; width: 44px; height: 44px; place-items: center; border: 1.5px solid #C7D6E2; border-radius: 50%; color: var(--navy); background: var(--white); transition: color var(--ease), background var(--ease), border-color var(--ease), transform var(--ease); }
 .carousel-button:hover { color: var(--white); background: var(--blue); border-color: var(--blue); transform: translateY(-2px); }
 .carousel-button.previous .icon { transform: rotate(180deg); }
@@ -261,11 +261,8 @@ p { color: var(--muted); }
 /* Footer */
 .site-footer { padding-top: 4.5rem; color: #B0C4D4; background: linear-gradient(180deg,#0A2234 0%,#091D2C 100%); }
 .footer-main { display: grid; grid-template-columns: 1.45fr .75fr .95fr 1.1fr; gap: 2.5rem; padding-bottom: 3.8rem; }
-.footer-logo { display: inline-flex; flex-direction: column; margin-bottom: .95rem; line-height: 1; }
-.footer-logo > span { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: -.09em; }
-.footer-logo b { color: var(--steel); }
-.footer-logo strong { color: var(--white); }
-.footer-logo small { margin-top: .35rem; color: #8AAABF; font-size: .52rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.footer-logo { display: inline-block; margin-bottom: .95rem; }
+.footer-logo-img { display: block; width: 160px; height: auto; max-height: 50px; object-fit: contain; object-position: left center; filter: brightness(0) invert(1); }
 .footer-brand p { max-width: 340px; color: #9AAFBE; font-size: .8rem; line-height: 1.65; }
 .footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: .55rem; font-size: .79rem; }
 .footer-column h2 { margin-bottom: .65rem; color: var(--white); font-family: var(--font-body); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; }
@@ -273,7 +270,7 @@ p { color: var(--muted); }
 .footer-column a:hover { color: var(--white); }
 .footer-column p { margin: 0 0 .3rem; color: #9AAFBE; font-size: .79rem; line-height: 1.6; }
 .linkedin-link { display: inline-flex; align-items: center; gap: .45rem; margin-top: .4rem; color: var(--white); }
-.footer-bottom { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.3rem; border-top: 1px solid rgba(255,255,255,.08); }
+.footer-bottom { display: flex; justify-content: center; gap: 1rem; padding-block: 1.3rem; border-top: 1px solid rgba(255,255,255,.08); text-align: center; }
 .footer-bottom p { margin: 0; color: #6E8898; font-size: .68rem; }
 
 /* Floating WhatsApp */
@@ -329,7 +326,7 @@ p { color: var(--muted); }
   .section-heading { margin-bottom: 2.4rem; } .solutions-grid { grid-template-columns: 1fr; } .solution-card { min-height: 0; padding: 1.65rem; } .solution-icon { margin-bottom: 1.15rem; } .solution-card p { margin-bottom: 1.1rem; }
   .differentials-intro, .faq-intro { position: static; } .differentials-intro { margin-bottom: 2.8rem; } .differentials-grid { grid-template-columns: 1fr; gap: 1rem; } .differential-item { gap: .9rem; } .differential-item p { font-size: .81rem; }
   .process-timeline { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2.7rem; padding-left: 0; } .process-timeline::before { top: 25px; bottom: 25px; left: 24px; right: auto; width: 1px; height: auto; } .process-step { display: flex; gap: 1.2rem; } .step-number { flex: 0 0 auto; margin: 0; } .process-step h3 { margin-top: .2rem; text-align: left; } .process-step p { text-align: left; }
-  .testimonials-header { align-items: flex-end; margin-bottom: 1.9rem; } .testimonials-header h2 { font-size: 1.8rem; } .carousel-controls { flex: 0 0 auto; } .carousel-button { width: 40px; height: 40px; } .testimonials-viewport { overflow: hidden; margin-right: -18px; } .testimonials-track { display: flex; gap: 1rem; } .testimonial-card { min-width: calc(100vw - 54px); min-height: 288px; padding: 1.55rem; } .testimonial-card blockquote { font-size: .89rem; }
+  .testimonials-header { align-items: flex-end; margin-bottom: 1.9rem; } .testimonials-header h2 { font-size: 1.8rem; } .carousel-controls { display: flex; flex: 0 0 auto; } .carousel-button { width: 40px; height: 40px; } .testimonials-viewport { overflow: hidden; margin-right: -18px; } .testimonials-track { display: flex; gap: 1rem; } .testimonial-card { min-width: calc(100vw - 54px); min-height: 288px; padding: 1.55rem; } .testimonial-card blockquote { font-size: .89rem; }
   .faq-intro { margin-bottom: 2.1rem; } .faq-item summary { padding: 1.05rem 0; font-size: .86rem; } .faq-item p { margin-right: 0; font-size: .81rem; }
   .contact-copy { margin-bottom: -.4rem; } .contact-actions { display: grid; grid-template-columns: 1fr; } .contact-actions .button { width: 100%; } .form-row { grid-template-columns: 1fr; gap: 0; } .contact-form { padding: 1.4rem; }
   .final-cta { padding-block: 3.8rem; } .final-cta::after { width: 270px; height: 270px; top: -80px; right: -120px; } .final-cta-content { flex-direction: column; align-items: flex-start; gap: 1.8rem; } .final-cta h2 { font-size: 1.85rem; } .final-cta .button { width: 100%; }
