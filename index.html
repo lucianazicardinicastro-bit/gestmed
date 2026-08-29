@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A GestMed resolve furos de escala, turnover alto e falta de padronização assistencial. Gestão completa de equipes médicas com segurança jurídica e humanização no plantão.">
+  <meta name="theme-color" content="#173A5E">
+  <meta property="og:title" content="GestMed | Gestão de Equipes Médicas e Escalas de Plantão">
+  <meta property="og:description" content="Gestão médica inteligente para escalas previsíveis, equipes qualificadas e eficiência assistencial.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <title>GestMed | Gestão de Equipes Médicas e Escalas de Plantão</title>
+  <!-- Favicon temporário derivado da identidade visual; substitua pelo ícone isolado da marca quando disponível. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23173A5E'/%3E%3Ccircle cx='20' cy='27' r='7' fill='%237FA3CC'/%3E%3Ccircle cx='32' cy='21' r='8' fill='%232F6CAE'/%3E%3Ccircle cx='44' cy='27' r='7' fill='%23fff'/%3E%3Cpath d='M8 49c2-9 20-9 24 0M20 49c2-11 22-11 25 0M34 49c2-9 17-9 22 0' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <!-- Sprite de ícones lineares inspirados em Lucide. -->
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h5"/></symbol>
+    <symbol id="icon-stethoscope" viewBox="0 0 24 24"><path d="M4 3v6a4 4 0 0 0 8 0V3M4 7h3M12 3v6a4 4 0 0 1-4 4M16 6a3 3 0 1 1 6 0v7a5 5 0 0 1-10 0v-1"/><circle cx="17" cy="18" r="2"/></symbol>
+    <symbol id="icon-message" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 9.7 9.7 0 0 1-4-.9L3 21l1.7-4.4A8 8 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 16l4-5 3 2 5-7"/><path d="M16 6h3v3"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 22s8-3.7 8-10V5l-8-3-8 3v7c0 6.3 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M16 5.5a3 3 0 0 1 0 5.8M18 20v-1a6 6 0 0 0-3.3-5.4"/></symbol>
+    <symbol id="icon-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4a3 3 0 0 1 6 0M9 12h6M9 16h4"/></symbol>
+    <symbol id="icon-headset" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2M4 14a2 2 0 0 0 2 2h1v-4H6a2 2 0 0 0-2 2ZM20 14a2 2 0 0 1-2 2h-1v-4h1a2 2 0 0 1 2 2ZM17 19c0 1-2 2-5 2"/></symbol>
+    <symbol id="icon-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5h9v16M14 9h5v12M8 8h3M8 12h3M8 16h3M16 12h1M16 16h1"/></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.9 2.2Z"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="icon-map" viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="icon-quote" viewBox="0 0 24 24"><path d="M9 11H5a4 4 0 0 1 4-4v4ZM19 11h-4a4 4 0 0 1 4-4v4ZM5 11h4v2a4 4 0 0 1-4 4v-6ZM15 11h4v2a4 4 0 0 1-4 4v-6Z"/></symbol>
+    <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M6.5 8.5v9M6.5 5.5v.1M10.5 17.5v-5a4 4 0 0 1 8 0v5M10.5 12.5v-4"/><circle cx="6.5" cy="5.5" r="1"/></symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.7 7.4L3 20l1.2-4.4A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.3 7.8c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.8 1.8c.1.2.1.4 0 .6l-.5.7c.4.9 1.1 1.7 2 2.1l.7-.5c.2-.1.4-.2.6 0l1.8.8c.2.1.3.3.3.5v.5c0 .4-.3.7-.7.8-1.1.2-3.6-.2-5.7-2.2-2-1.9-2.5-4.4-2.1-5.6Z"/></symbol>
+  </svg>
+
+  <header class="site-header" id="inicio">
+    <div class="container header-content">
+      <a class="brand" href="#inicio" aria-label="GestMed — página inicial">
+        <!-- Logo oficial: substitua Logo-GestMed.png por uma versão em alta resolução com fundo transparente, se necessário. -->
+        <img src="Logo-GestMed.png" alt="GestMed — Gestão Médica Inteligente" width="190" height="70">
+      </a>
+
+      <button class="menu-toggle" type="button" aria-controls="main-menu" aria-expanded="false">
+        <span class="sr-only">Abrir menu</span>
+        <svg class="icon icon-menu"><use href="#icon-menu"/></svg>
+        <svg class="icon icon-close"><use href="#icon-close"/></svg>
+      </button>
+
+      <nav class="main-nav" id="main-menu" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre nós</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#contato">Contato</a>
+        <a class="button button-small button-primary nav-cta" href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Encontrei%20o%20site%20da%20GestMed%20e%20gostaria%20de%20agendar%20uma%20conversa%20com%20um%20consultor." target="_blank" rel="noopener">Fale com um consultor</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero section-grid" aria-labelledby="hero-title">
+    <div class="hero-bg-image" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Gestão médica inteligente</span>
+          <h1 id="hero-title">Escalas médicas completas, equipes qualificadas e gestão sem dor de cabeça.</h1>
+          <p>Otimizamos a escala, a eficiência assistencial e a liderança médica do seu hospital ou pronto-socorro com processos estruturados e foco na qualidade do atendimento.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Encontrei%20o%20site%20da%20GestMed%20e%20gostaria%20de%20agendar%20uma%20conversa%20com%20um%20consultor." target="_blank" rel="noopener">Solicitar diagnóstico de escala <svg class="icon"><use href="#icon-arrow"/></svg></a>
+            <a class="button button-secondary" href="#solucoes">Conhecer nossas soluções</a>
+          </div>
+          <div class="hero-note"><svg class="icon"><use href="#icon-shield"/></svg><span>Processos estruturados, gestão presente e segurança em cada plantão.</span></div>
+        </div>
+
+        <div class="hero-media reveal">
+          <!-- Placeholder de imagem: troque esta URL por uma fotografia própria da operação GestMed. -->
+          <img src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=1200&q=85" alt="Equipe médica em reunião de coordenação em ambiente hospitalar" width="1200" height="900">
+          <div class="coverage-card">
+            <span class="coverage-icon"><svg class="icon"><use href="#icon-calendar"/></svg></span>
+            <span><strong>98%</strong><small>de cobertura de escala</small></span>
+          </div>
+          <span class="hero-grid-decoration" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-strip" aria-label="Indicadores GestMed">
+      <div class="container stats-grid">
+        <article class="stat-item">
+          <strong class="stat-number" data-target="98" data-suffix="%">98%</strong>
+          <span>de cobertura de escala</span>
+        </article>
+        <article class="stat-item">
+          <strong class="stat-number" data-target="40" data-prefix="+" data-suffix="%">+40%</strong>
+          <span>de redução no turnover médico</span>
+        </article>
+        <article class="stat-item">
+          <strong class="stat-number" data-target="24" data-suffix="/7">24/7</strong>
+          <span>gestão de plantões</span>
+        </article>
+        <article class="stat-item">
+          <strong class="stat-number" data-target="50" data-prefix="+">+50</strong>
+          <span>hospitais e prontos-socorros atendidos</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section about-section" id="sobre" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="about-media reveal">
+          <!-- Placeholders de imagem: substitua pelas fotos institucionais da GestMed. -->
+          <img class="about-image-main" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85" alt="Profissional de saúde usando dados clínicos em um tablet" width="1000" height="1100" loading="lazy">
+          <img class="about-image-small" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=85" alt="Médicos conversando em corredor hospitalar" width="600" height="420" loading="lazy">
+          <div class="experience-badge"><strong>Gestão que<br>está presente</strong><span>no dia a dia da operação</span></div>
+        </div>
+        <div class="about-copy reveal">
+          <span class="eyebrow">Quem somos</span>
+          <h2 id="about-title">A ponte entre a excelência médica e a eficiência operacional.</h2>
+          <p>Na GestMed, entendemos que uma equipe médica bem gerida é o coração de qualquer instituição de saúde de sucesso. Nascemos para solucionar os principais desafios da gestão de plantões: furos de escala, falta de padronização nos atendimentos e alta rotatividade.</p>
+          <p>Unimos inteligência operacional, tecnologia e treinamento contínuo de soft skills para entregar escalas 100% cobertas, médicos engajados e processos assistenciais alinhados às metas do seu hospital.</p>
+          <ul class="check-list">
+            <li><svg class="icon"><use href="#icon-check"/></svg>Inteligência operacional aplicada à escala médica</li>
+            <li><svg class="icon"><use href="#icon-check"/></svg>Tecnologia de gestão e monitoramento contínuo</li>
+            <li><svg class="icon"><use href="#icon-check"/></svg>Treinamento contínuo de soft skills</li>
+            <li><svg class="icon"><use href="#icon-check"/></svg>Processos alinhados às metas assistenciais do hospital</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section solutions-section" id="solucoes" aria-labelledby="solutions-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Nossas soluções</span>
+          <h2 id="solutions-title">Soluções completas para a gestão da sua equipe médica</h2>
+          <p>Da escala ao atendimento, cuidamos de cada etapa da operação assistencial do seu hospital.</p>
+        </div>
+        <div class="solutions-grid">
+          <article class="solution-card reveal">
+            <span class="solution-icon"><svg class="icon"><use href="#icon-calendar"/></svg></span>
+            <h3>Gestão e dimensionamento de escalas</h3>
+            <p>Cobertura garantida de plantões 24/7, com inteligência de alocação, escala reserva e zero furos.</p>
+            <a href="#contato" class="text-link">Entenda a solução <svg class="icon"><use href="#icon-arrow"/></svg></a>
+          </article>
+          <article class="solution-card reveal">
+            <span class="solution-icon"><svg class="icon"><use href="#icon-stethoscope"/></svg></span>
+            <h3>Recrutamento e seleção especializado</h3>
+            <p>Atração e credenciamento rigoroso de médicos alinhados ao perfil e à cultura da sua instituição.</p>
+            <a href="#contato" class="text-link">Entenda a solução <svg class="icon"><use href="#icon-arrow"/></svg></a>
+          </article>
+          <article class="solution-card reveal">
+            <span class="solution-icon"><svg class="icon"><use href="#icon-message"/></svg></span>
+            <h3>Capacitação e soft skills</h3>
+            <p>Treinamentos contínuos em comunicação empática, humanização, protocolo SBAR e gestão de conflitos.</p>
+            <a href="#contato" class="text-link">Entenda a solução <svg class="icon"><use href="#icon-arrow"/></svg></a>
+          </article>
+          <article class="solution-card reveal">
+            <span class="solution-icon"><svg class="icon"><use href="#icon-chart"/></svg></span>
+            <h3>Gestão de indicadores e performance</h3>
+            <p>Acompanhamento de métricas de atendimento: tempo de espera, NPS, assiduidade e qualidade assistencial.</p>
+            <a href="#contato" class="text-link">Entenda a solução <svg class="icon"><use href="#icon-arrow"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section differentials-section" id="diferenciais" aria-labelledby="differentials-title">
+      <div class="differentials-bg" aria-hidden="true"></div>
+      <div class="differentials-bg-img" aria-hidden="true"></div>
+      <div class="container differentials-layout">
+        <div class="differentials-intro reveal">
+          <span class="eyebrow">Diferenciais GestMed</span>
+          <h2 id="differentials-title">Por que escolher a GestMed?</h2>
+          <p>Uma parceria construída para proteger a rotina do seu hospital e fortalecer a experiência de quem atende.</p>
+          <a class="button button-secondary" href="#processo">Conheça nosso processo</a>
+        </div>
+        <div class="differentials-grid">
+          <article class="differential-item reveal"><svg class="icon"><use href="#icon-calendar"/></svg><div><h3>Garantia de plantão coberto</h3><p>Sistema de plantão reserva ativo para absorver intercorrências sem desfalcar a assistência.</p></div></article>
+          <article class="differential-item reveal"><svg class="icon"><use href="#icon-users"/></svg><div><h3>Médicos treinados em soft skills</h3><p>Profissionais preparados para cenários de alta pressão, acolhimento e comunicação assertiva.</p></div></article>
+          <article class="differential-item reveal"><svg class="icon"><use href="#icon-shield"/></svg><div><h3>Segurança operacional e jurídica</h3><p>Rigor no compliance de documentação, vínculos contratuais e habilitação dos profissionais.</p></div></article>
+          <article class="differential-item reveal"><svg class="icon"><use href="#icon-headset"/></svg><div><h3>Liderança médica presente</h3><p>Coordenadores dedicados a acompanhar a rotina e os indicadores da sua unidade.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process-section" id="processo" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-heading section-heading-centered reveal">
+          <span class="eyebrow">Uma parceria estruturada</span>
+          <h2 id="process-title">Como funciona a parceria com a GestMed</h2>
+        </div>
+        <ol class="process-timeline">
+          <li class="process-step reveal"><span class="step-number">01</span><div><h3>Diagnóstico da escala</h3><p>Analisamos o cenário atual do seu hospital: furos, turnover e indicadores assistenciais.</p></div></li>
+          <li class="process-step reveal"><span class="step-number">02</span><div><h3>Plano de ação personalizado</h3><p>Desenhamos a estrutura de escala, recrutamento e treinamento sob medida.</p></div></li>
+          <li class="process-step reveal"><span class="step-number">03</span><div><h3>Implementação</h3><p>Assumimos a operação com equipe qualificada e sistema de plantão reserva ativo.</p></div></li>
+          <li class="process-step reveal"><span class="step-number">04</span><div><h3>Acompanhamento contínuo</h3><p>Monitoramos indicadores e ajustamos o processo com liderança médica presente.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section testimonials-section" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="testimonials-header reveal">
+          <div><span class="eyebrow">Parcerias que geram confiança</span><h2 id="testimonials-title">Quem confia na GestMed sente a diferença na operação</h2></div>
+          <div class="carousel-controls" aria-label="Navegação dos depoimentos"><button class="carousel-button previous" type="button" aria-label="Depoimento anterior"><svg class="icon"><use href="#icon-arrow"/></svg></button><button class="carousel-button next" type="button" aria-label="Próximo depoimento"><svg class="icon"><use href="#icon-arrow"/></svg></button></div>
+        </div>
+        <div class="testimonials-viewport" tabindex="0" aria-label="Depoimentos de clientes">
+          <div class="testimonials-track">
+            <article class="testimonial-card">
+              <svg class="quote-icon"><use href="#icon-quote"/></svg>
+              <blockquote>“A GestMed trouxe previsibilidade para uma operação que vivia reagindo a furos de escala. Hoje temos uma coordenação muito mais segura e presente.”</blockquote>
+              <footer><span class="initials initials-blue">RC</span><span><strong>Ricardo Campos</strong><small>Diretor Hospitalar, Hospital São Lucas</small></span></footer>
+            </article>
+            <article class="testimonial-card">
+              <svg class="quote-icon"><use href="#icon-quote"/></svg>
+              <blockquote>“O processo de seleção e o apoio da liderança médica elevaram o padrão de comunicação do pronto-socorro sem sobrecarregar nossa equipe interna.”</blockquote>
+              <footer><span class="initials initials-light">AM</span><span><strong>Ana Martins</strong><small>Coordenadora de Pronto-Socorro, Vida Norte</small></span></footer>
+            </article>
+            <article class="testimonial-card">
+              <svg class="quote-icon"><use href="#icon-quote"/></svg>
+              <blockquote>“Encontramos na GestMed uma parceira cuidadosa com compliance e contratos. Isso nos deu tranquilidade para focar na gestão estratégica.”</blockquote>
+              <footer><span class="initials initials-dark">FL</span><span><strong>Fernanda Lima</strong><small>Gestora de RH em Saúde, Instituto Horizonte</small></span></footer>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-section" aria-labelledby="faq-title">
+      <div class="container faq-layout">
+        <div class="faq-intro reveal"><span class="eyebrow">Dúvidas frequentes</span><h2 id="faq-title">Respostas claras para uma decisão segura.</h2><p>Se a sua dúvida não estiver aqui, nossa equipe está pronta para entender o contexto da sua instituição.</p><a class="text-link" href="#contato">Fale com a GestMed <svg class="icon"><use href="#icon-arrow"/></svg></a></div>
+        <div class="faq-list reveal">
+          <details class="faq-item"><summary>Como funciona o sistema de plantão reserva?<svg class="icon"><use href="#icon-chevron"/></svg></summary><p>Mapeamos as necessidades de cada unidade e mantemos uma estrutura de profissionais elegíveis para absorver intercorrências, reduzindo riscos de desfalque na assistência.</p></details>
+          <details class="faq-item"><summary>A GestMed cuida da parte jurídica e contratual dos médicos?<svg class="icon"><use href="#icon-chevron"/></svg></summary><p>Atuamos com processos rigorosos de documentação, habilitação e organização contratual, em alinhamento com as diretrizes e a assessoria jurídica da instituição.</p></details>
+          <details class="faq-item"><summary>Qual o prazo médio para cobertura de uma escala vaga?<svg class="icon"><use href="#icon-chevron"/></svg></summary><p>O prazo depende da especialidade, da região e da complexidade da unidade. Após o diagnóstico, apresentamos um plano de cobertura realista e acompanhado de perto.</p></details>
+          <details class="faq-item"><summary>Como é feito o processo de seleção dos profissionais?<svg class="icon"><use href="#icon-chevron"/></svg></summary><p>Avaliamos credenciais, experiência, aderência técnica e comportamental, além da compatibilidade com os protocolos e a cultura assistencial do hospital.</p></details>
+          <details class="faq-item"><summary>É possível contratar apenas um dos serviços?<svg class="icon"><use href="#icon-chevron"/></svg></summary><p>Sim. A GestMed estrutura soluções conforme a necessidade da instituição, seja para recrutamento, capacitação, gestão de escala ou uma operação completa.</p></details>
+          <details class="faq-item"><summary>Como funcionam os treinamentos de soft skills?<svg class="icon"><use href="#icon-chevron"/></svg></summary><p>Os treinamentos combinam situações práticas da rotina assistencial com temas como comunicação empática, protocolo SBAR, humanização e gestão de conflitos.</p></details>
+          <details class="faq-item"><summary>A GestMed atende hospitais de pequeno e médio porte?<svg class="icon"><use href="#icon-chevron"/></svg></summary><p>Sim. Adaptamos o modelo de atuação à estrutura, ao volume de atendimento e aos objetivos operacionais de hospitais, clínicas e prontos-socorros de diferentes portes.</p></details>
+          <details class="faq-item"><summary>Como acompanho os indicadores da minha equipe?<svg class="icon"><use href="#icon-chevron"/></svg></summary><p>Definimos indicadores de acompanhamento junto à liderança e mantemos uma rotina de análise para orientar ajustes e decisões de gestão.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contato" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal">
+          <span class="eyebrow">Vamos conversar</span>
+          <h2 id="contact-title">Fale com a GestMed</h2>
+          <p>Conte o desafio da sua operação. Um consultor entrará em contato para entender o cenário e indicar os próximos passos.</p>
+          <address class="contact-details">
+            <span><svg class="icon"><use href="#icon-map"/></svg><span><strong>Endereço</strong>Av. Paulista, 1000 – Bela Vista, São Paulo – SP</span></span>
+            <span><svg class="icon"><use href="#icon-building"/></svg><span><strong>Horário comercial</strong>Segunda a sexta: 8h às 18h</span></span>
+            <span><svg class="icon"><use href="#icon-phone"/></svg><span><strong>Contato</strong>(11) 99999-9999 &nbsp;|&nbsp; contato@gestmed.com.br</span></span>
+          </address>
+          <div class="contact-actions"><a class="button button-primary" href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Encontrei%20o%20site%20da%20GestMed%20e%20gostaria%20de%20agendar%20uma%20conversa%20com%20um%20consultor." target="_blank" rel="noopener">Solicitar diagnóstico de escala</a><a class="button button-secondary" href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Encontrei%20o%20site%20da%20GestMed%20e%20gostaria%20de%20agendar%20uma%20conversa%20com%20um%20consultor." target="_blank" rel="noopener">Falar via WhatsApp</a></div>
+        </div>
+        <form class="contact-form reveal" id="contact-form" novalidate>
+          <div class="form-heading"><h3>Solicite um contato</h3><p>Preencha seus dados e retornaremos em breve.</p></div>
+          <div class="form-row"><div class="form-field"><label for="name">Nome <span aria-hidden="true">*</span></label><input id="name" name="name" type="text" autocomplete="name" required></div><div class="form-field"><label for="institution">Instituição <span aria-hidden="true">*</span></label><input id="institution" name="institution" type="text" required></div></div>
+          <div class="form-row"><div class="form-field"><label for="role">Cargo <span aria-hidden="true">*</span></label><input id="role" name="role" type="text" required></div><div class="form-field"><label for="phone">Telefone <span aria-hidden="true">*</span></label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div></div>
+          <div class="form-field"><label for="email">E-mail corporativo <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" required></div>
+          <div class="form-field"><label for="message">Como podemos ajudar? <span aria-hidden="true">*</span></label><textarea id="message" name="message" rows="4" required></textarea></div>
+          <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
+          <button class="button button-primary button-full" type="submit">Enviar solicitação <svg class="icon"><use href="#icon-arrow"/></svg></button>
+          <small class="form-disclaimer">Ao enviar, você concorda em ser contatado pela GestMed.</small>
+        </form>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="final-cta-title">
+      <div class="final-cta-bg-img" aria-hidden="true"></div>
+      <div class="container final-cta-content reveal">
+        <div><span class="eyebrow eyebrow-light">Uma gestão mais previsível começa aqui</span><h2 id="final-cta-title">Pronto para transformar a gestão médica do seu hospital?</h2><p>Agende uma conversa com nossos especialistas e descubra como garantir escalas previsíveis, redução de custos operacionais e alta satisfação dos pacientes.</p></div>
+        <a class="button button-primary" href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Encontrei%20o%20site%20da%20GestMed%20e%20gostaria%20de%20agendar%20uma%20conversa%20com%20um%20consultor." target="_blank" rel="noopener">Falar com a equipe via WhatsApp <svg class="icon"><use href="#icon-arrow"/></svg></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand"><a class="footer-logo" href="#inicio" aria-label="GestMed — Gestão Médica Inteligente, página inicial"><span><b>Gest</b><strong>Med</strong></span><small>Gestão Médica Inteligente</small></a><p>Gestão de equipes médicas com inteligência operacional, segurança e presença na rotina assistencial.</p></div>
+      <div class="footer-column"><h2>Links rápidos</h2><a href="#inicio">Início</a><a href="#sobre">Sobre nós</a><a href="#solucoes">Soluções</a><a href="#diferenciais">Diferenciais</a><a href="#contato">Contato</a></div>
+      <div class="footer-column"><h2>Soluções</h2><a href="#solucoes">Gestão de escalas</a><a href="#solucoes">Recrutamento médico</a><a href="#solucoes">Capacitação e soft skills</a><a href="#solucoes">Indicadores e performance</a></div>
+      <div class="footer-column footer-contact"><h2>Contato</h2><p>Av. Paulista, 1000<br>Bela Vista, São Paulo – SP</p><a href="tel:+5511999999999">(11) 99999-9999</a><a href="mailto:contato@gestmed.com.br">contato@gestmed.com.br</a><a class="linkedin-link" href="https://www.linkedin.com/" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-linkedin"/></svg>LinkedIn</a></div>
+    </div>
+    <div class="container footer-bottom"><p>© <span id="current-year"></span> GestMed. Todos os direitos reservados.</p><p>Site demonstrativo — substitua os dados antes da publicação.</p></div>
+  </footer>
+
+  <!-- O número 5511999999999 é um placeholder. Substitua-o pelo WhatsApp comercial antes da publicação. -->
+  <a class="whatsapp-float" href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Encontrei%20o%20site%20da%20GestMed%20e%20gostaria%20de%20agendar%20uma%20conversa%20com%20um%20consultor." target="_blank" rel="noopener" aria-label="Falar com a GestMed via WhatsApp"><svg class="icon"><use href="#icon-whatsapp"/></svg><span>Fale conosco</span></a>
+
+  <script src="script.js"></script>
+</body>
+</html>
