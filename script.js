@@ -1,12 +1,11 @@
-/* GestMed — interações sem dependências externas */
-document.addEventListener("DOMContentLoaded", () => {
+/* GestMed — interações */
+const init = () => {
   const header = document.querySelector(".site-header");
   const menuButton = document.querySelector(".menu-toggle");
   const mainMenu = document.querySelector(".main-nav");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Cabeçalho ganha presença sutil depois da primeira dobra.
-  const updateHeader = () => header.classList.toggle("scrolled", window.scrollY > 16);
+  const updateHeader = () => header?.classList.toggle("scrolled", window.scrollY > 16);
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
 
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   mainMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
   window.addEventListener("resize", () => { if (window.innerWidth > 720) closeMenu(); });
 
-  // Fecha os demais itens do FAQ quando um novo é aberto, mantendo a leitura objetiva.
+  // Fecha os demais itens do FAQ quando um novo é aberto.
   const faqItems = document.querySelectorAll(".faq-item");
   faqItems.forEach((item) => {
     item.addEventListener("toggle", () => {
@@ -35,11 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Entrada discreta de seções conforme entram no viewport.
+  // Entrada suave das seções (Reveal on Scroll)
   const revealItems = document.querySelectorAll(".reveal");
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    revealItems.forEach((item) => item.classList.add("is-visible"));
-  } else {
+  if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -47,67 +44,71 @@ document.addEventListener("DOMContentLoaded", () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: .12, rootMargin: "0px 0px -20px" });
+    }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
     revealItems.forEach((item) => revealObserver.observe(item));
+  } else {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
   }
 
-  // Contagem dos indicadores com efeito visual aprimorado.
-  const statNumbers = document.querySelectorAll(".stat-number");
-  const animateStat = (element, delay) => {
-    if (element.dataset.animated === "true") return;
-    element.dataset.animated = "true";
-    const target = Number(element.dataset.target);
-    const prefix = element.dataset.prefix || "";
-    const suffix = element.dataset.suffix || "";
-    if (reduceMotion) {
-      element.textContent = `${prefix}${target}${suffix}`;
-      return;
-    }
-    element.textContent = `${prefix}0${suffix}`;
-    setTimeout(() => {
-      element.classList.add("is-counting");
-      const duration = 1800;
-      const start = performance.now();
-      const updateNumber = (now) => {
-        const progress = Math.min((now - start) / duration, 1);
-        // easeOutExpo for a dramatic fast-start, slow-finish effect
-        const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        element.textContent = `${prefix}${Math.round(target * eased)}${suffix}`;
-        if (progress < 1) {
-          requestAnimationFrame(updateNumber);
-        } else {
-          element.classList.remove("is-counting");
-        }
-      };
-      requestAnimationFrame(updateNumber);
-    }, delay);
+  // Animação de contagem dos números (Stats)
+  const animateCounter = (el) => {
+    if (el.dataset.animated === "true") return;
+    el.dataset.animated = "true";
+
+    const target = parseFloat(el.dataset.target) || 0;
+    const prefix = el.dataset.prefix || "";
+    const suffix = el.dataset.suffix || "";
+    const duration = 1800; // 1.8 segundos de animação
+    const startTime = performance.now();
+
+    el.textContent = `${prefix}0${suffix}`;
+    el.classList.add("is-counting");
+
+    const update = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Easing suave (easeOutCubic)
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(target * ease);
+      el.textContent = `${prefix}${current}${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        el.textContent = `${prefix}${target}${suffix}`;
+        el.classList.remove("is-counting");
+      }
+    };
+
+    requestAnimationFrame(update);
   };
 
-  if ("IntersectionObserver" in window) {
+  // Observer para a seção de estatísticas (Stats Strip)
+  const statItems = document.querySelectorAll(".stat-item");
+  if ("IntersectionObserver" in window && statItems.length > 0) {
     const statsObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Animate stat items entrance with stagger
-          const items = entry.target.querySelectorAll(".stat-item");
-          items.forEach((item, i) => {
-            setTimeout(() => item.classList.add("is-visible"), i * 150);
-          });
-          // Animate numbers with stagger after items appear
-          entry.target.querySelectorAll(".stat-number").forEach((num, i) => {
-            animateStat(num, i * 200 + 300);
-          });
+          entry.target.classList.add("is-visible");
+          const num = entry.target.querySelector(".stat-number");
+          if (num) {
+            animateCounter(num);
+          }
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: .25 });
-    const strip = document.querySelector(".stats-strip");
-    if (strip) statsObserver.observe(strip);
+    }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+
+    statItems.forEach((item) => statsObserver.observe(item));
   } else {
-    document.querySelectorAll(".stat-item").forEach(item => item.classList.add("is-visible"));
-    statNumbers.forEach((num) => animateStat(num, 0));
+    statItems.forEach((item) => {
+      item.classList.add("is-visible");
+      const num = item.querySelector(".stat-number");
+      if (num) animateCounter(num);
+    });
   }
 
-  // Carrossel de depoimentos: controles e gesto horizontal em telas pequenas.
+  // Carrossel de depoimentos
   const track = document.querySelector(".testimonials-track");
   const viewport = document.querySelector(".testimonials-viewport");
   const previous = document.querySelector(".carousel-button.previous");
@@ -145,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { passive: true });
   window.addEventListener("resize", updateCarousel);
 
-  // Validação de front-end. Integre o envio a uma API/serviço de e-mail aqui futuramente.
+  // Validação do formulário de contato
   const form = document.querySelector("#contact-form");
   const feedback = document.querySelector("#form-feedback");
   form?.addEventListener("submit", (event) => {
@@ -171,4 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const year = document.querySelector("#current-year");
   if (year) year.textContent = new Date().getFullYear();
-});
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
