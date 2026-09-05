@@ -4,6 +4,69 @@ const init = () => {
   const menuButton = document.querySelector(".menu-toggle");
   const mainMenu = document.querySelector(".main-nav");
 
+  // Controle de Acesso / Site em Construção (Senha: gestmed2026)
+  const initMaintenanceGate = () => {
+    const SECRET_PASSWORD = "gestmed2026";
+    const overlay = document.querySelector("#maintenance-overlay");
+    const form = document.querySelector("#maintenance-form");
+    const input = document.querySelector("#maintenance-pass");
+    const errorMsg = document.querySelector("#maintenance-error");
+    const previewBar = document.querySelector("#preview-control-bar");
+    const lockBtn = document.querySelector("#lock-site-btn");
+
+    if (!overlay || !form || !input) return;
+
+    const unlockSite = () => {
+      sessionStorage.setItem("gestmed_authenticated", "true");
+      overlay.classList.add("hidden");
+      document.body.classList.remove("maintenance-active");
+      if (previewBar) previewBar.classList.remove("hidden");
+    };
+
+    const lockSite = () => {
+      sessionStorage.removeItem("gestmed_authenticated");
+      overlay.classList.remove("hidden");
+      document.body.classList.add("maintenance-active");
+      if (previewBar) previewBar.classList.add("hidden");
+      if (input) input.value = "";
+      if (errorMsg) errorMsg.textContent = "";
+    };
+
+    // 1. Atalho via parâmetro de URL (?acesso=gestmed2026 ou ?preview=gestmed2026)
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramAccess = urlParams.get("acesso") || urlParams.get("preview");
+
+    if (paramAccess === SECRET_PASSWORD) {
+      unlockSite();
+    } else if (sessionStorage.getItem("gestmed_authenticated") === "true") {
+      unlockSite();
+    } else {
+      document.body.classList.add("maintenance-active");
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const value = input.value.trim();
+
+      if (value === SECRET_PASSWORD) {
+        if (errorMsg) errorMsg.textContent = "";
+        input.classList.remove("is-invalid");
+        unlockSite();
+      } else {
+        input.classList.add("is-invalid");
+        if (errorMsg) errorMsg.textContent = "Senha incorreta. Tente novamente.";
+        input.focus();
+        setTimeout(() => input.classList.remove("is-invalid"), 500);
+      }
+    });
+
+    lockBtn?.addEventListener("click", () => {
+      lockSite();
+    });
+  };
+
+  initMaintenanceGate();
+
   // Cabeçalho ganha presença sutil depois da primeira dobra.
   const updateHeader = () => header?.classList.toggle("scrolled", window.scrollY > 16);
   updateHeader();
